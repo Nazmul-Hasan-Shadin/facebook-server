@@ -4,12 +4,14 @@ const applayMiddleware = require('./middleware/applyMiddleWare');
 const app=express();
 
 const loginRouter=require('./router/login/login')
+const getTarget=require('./router/getTargets/getTarget')
 
 connectToDatabase()
 applayMiddleware(app)
 
 
 app.use(loginRouter)
+app.use(getTarget)
 
 
 
