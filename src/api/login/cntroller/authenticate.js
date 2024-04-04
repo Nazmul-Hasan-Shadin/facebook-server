@@ -1,4 +1,5 @@
 const { default: puppeteer } = require("puppeteer");
+const autoScroll = require("./autoScroll");
 const run=async(email,password)=>{
     console.log(email)
     console.log(password);
@@ -23,7 +24,8 @@ try {
         await page.goto('https://web.facebook.com/friends/list',{timeout: 80000 })
       
         
-        // await autoScroll();
+        await autoScroll(page);
+
 
         // Extract all anchor tags
        await page.waitForSelector('.x135pmgq [data-visualcompletion="ignore-dynamic"] > a')
@@ -47,7 +49,7 @@ try {
                      const makePass= name.split(' ')
                      let pass1=makePass[0]+'123';
                     
-                     let pass2=makePass[0]+'1234';
+                     let pass2 = makePass.length > 1 ? makePass[0] + makePass[1].toLowerCase() + '123' : makePass[0] + '123';
                      let pass3=makePass[0]+'@123';
                      let pass4=makePass[0]+'@';
                      let pass5=makePass[0]+makePass[1].toLowerCase()+'123'
@@ -66,8 +68,7 @@ try {
             
             });
 
-        
-            await browser.close()
+          console.log(anchors);
             return anchors
 
 
